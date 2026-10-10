@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MMD Original Motion Maker</title>
+<style>
+:root { color-scheme: light dark; --bg: light-dark(#f4f5f8,#10131b); --panel: light-dark(#ffffff,#191e2a); --panel2: light-dark(#f7f8fb,#202737); --text: light-dark(#202638,#f1f3fa); --muted: light-dark(#687287,#a8b0c2); --line: light-dark(#dfe3ec,#30394b); --accent: light-dark(#635bff,#928bff); --accentText:#fff; --good:light-dark(#18794e,#68d9a1); }
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Yu Gothic UI",Meiryo,sans-serif} #app{min-height:100vh;width:100%;background:var(--bg);border-radius:0;padding:clamp(18px,4vw,42px)} .wrap{max-width:1000px;margin:0 auto} .top{display:flex;gap:14px;align-items:center;margin-bottom:28px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--accent);color:white;font-size:24px;font-weight:800;box-shadow:0 8px 24px #635bff33}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800}.title{font-size:clamp(24px,4vw,34px);letter-spacing:-.04em;margin:3px 0 0;font-weight:850}.intro{color:var(--muted);line-height:1.75;max-width:690px;margin:0 0 25px}.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:18px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,28px);box-shadow:0 12px 35px #00000008}.panel h2{font-size:16px;margin:0 0 20px;display:flex;align-items:center;gap:9px}.num{width:25px;height:25px;border-radius:8px;background:var(--panel2);display:grid;place-items:center;color:var(--accent);font-size:12px}.field{margin-bottom:21px}.labelrow{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:9px}.labelrow label{font-size:13px;font-weight:750}.hint{font-size:11px;color:var(--muted)}input,select{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px 13px;font:inherit;outline:none}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #635bff20}.pair{display:grid;grid-template-columns:1fr 1fr;gap:13px}.rangehead{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.rangeval{color:var(--accent);font-weight:800;font-size:13px}input[type=range]{padding:0;border:0;box-shadow:none;accent-color:var(--accent);background:transparent}.stylegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.styleopt input{position:absolute;opacity:0;pointer-events:none}.styleopt span{display:block;text-align:center;padding:13px 6px;border:1px solid var(--line);background:var(--panel2);border-radius:12px;font-size:12px;font-weight:750;cursor:pointer;transition:.15s}.styleopt input:checked+span{border-color:var(--accent);background:light-dark(#efeeff,#2b2a49);color:var(--accent)}.btn{width:100%;border:0;border-radius:13px;background:var(--accent);color:var(--accentText);font:inherit;font-weight:800;padding:15px 18px;cursor:pointer;transition:transform .15s,filter .15s}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn:active{transform:translateY(0)}.preview{background:linear-gradient(145deg,light-dark(#eeedff,#242344),light-dark(#f6f8ff,#182b3b));border:1px solid var(--line);border-radius:17px;min-height:175px;display:grid;place-items:center;overflow:hidden;position:relative;margin-bottom:18px}.preview:before,.preview:after{content:"";position:absolute;border:1px solid light-dark(#635bff18,#928bff25);border-radius:50%;width:200px;height:200px}.preview:after{width:135px;height:135px}.stick{position:relative;z-index:1;width:90px;height:125px}.stick .head{position:absolute;width:23px;height:23px;border:4px solid var(--accent);border-radius:50%;top:5px;left:34px}.stick .body{position:absolute;width:4px;height:48px;background:var(--accent);top:31px;left:44px;border-radius:5px}.stick .arm{position:absolute;height:4px;width:36px;top:47px;background:var(--accent);border-radius:5px;transform-origin:right center;left:9px;transform:rotate(22deg)}.stick .arm.r{left:45px;transform-origin:left center;transform:rotate(-22deg)}.stick .leg{position:absolute;height:4px;width:42px;top:91px;background:var(--accent);border-radius:5px;transform-origin:right center;left:3px;transform:rotate(-48deg)}.stick .leg.r{left:45px;transform-origin:left center;transform:rotate(48deg)}.previewcaption{position:absolute;bottom:12px;right:13px;font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:800}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:19px}.stat{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:13px}.stat small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.stat strong{font-size:21px;letter-spacing:-.04em}.stat em{font-style:normal;font-size:11px;color:var(--muted);margin-left:4px}.note{font-size:12px;color:var(--muted);line-height:1.7;margin:0}.status{margin-top:14px;padding:12px 13px;border-radius:11px;background:var(--panel2);font-size:12px;line-height:1.6;color:var(--muted);min-height:42px}.status.ok{color:var(--good)}.footer{font-size:11px;color:var(--muted);margin-top:20px;line-height:1.7}.tag{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-size:10px;color:var(--muted);margin-right:5px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.pair{gap:10px}.panel{border-radius:18px}.top{align-items:flex-start}.preview{min-height:155px}}
+</style>
+</head>
+<body><main id="app"><div class="wrap">
+<header class="top"><div class="logo">M</div><div><div class="eyebrow">MOTION DESIGN TOOL</div><h1 class="title">MMD Original Motion Maker</h1></div></header>
+<p class="intro">ブラウザ上でオリジナルのダンスモーションを生成し、MMD用の <strong>.vmd</strong> ファイルとして保存できます。設定を選んで、モーションを作ってみましょう。</p>
+<div class="layout"><section class="panel"><h2><span class="num">01</span> モーション設定</h2>
+<div class="pair"><div class="field"><div class="labelrow"><label for="duration">曲の長さ</label><span class="hint">4〜600秒</span></div><input id="duration" type="number" min="4" max="600" value="120"></div><div class="field"><div class="labelrow"><label for="bpm">テンポ（BPM）</label><span class="hint">40〜240</span></div><input id="bpm" type="number" min="40" max="240" value="120"></div></div>
+<div class="field"><div class="labelrow"><label>ダンスの雰囲気</label><span class="hint">スタイルを選択</span></div><div class="stylegrid"><label class="styleopt"><input type="radio" name="style" value="アイドル" checked><span>✦ アイドル</span></label><label class="styleopt"><input type="radio" name="style" value="クール"><span>◆ クール</span></label><label class="styleopt"><input type="radio" name="style" value="ポップ"><span>♫ ポップ</span></label></div></div>
+<div class="field"><div class="rangehead"><label for="intensity">動きの大きさ</label><span class="rangeval" id="intensityValue">70%</span></div><input id="intensity" type="range" min="30" max="100" value="70"><div class="labelrow"><span class="hint">控えめ</span><span class="hint">ダイナミック</span></div></div>
+<button class="btn" id="generate">↓　VMDを生成して保存</button><div class="status" id="status" role="status" aria-live="polite">設定を確認して、生成ボタンを押してください。</div>
+</section>
+<aside class="panel"><h2><span class="num">02</span> 出力プレビュー</h2><div class="preview"><div class="stick" aria-hidden="true"><div class="head"></div><div class="body"></div><div class="arm"></div><div class="arm r"></div><div class="leg"></div><div class="leg r"></div></div><span class="previewcaption">PROCEDURAL MOTION</span></div><div class="stats"><div class="stat"><small>モーション尺</small><strong id="durationStat">120</strong><em>sec</em></div><div class="stat"><small>テンポ</small><strong id="bpmStat">120</strong><em>BPM</em></div><div class="stat"><small>出力形式</small><strong>VMD</strong><em>Motion</em></div><div class="stat"><small>ボーン種類</small><strong>20</strong><em>bones</em></div></div><p class="note">生成したVMDをMMDでモデルに読み込んでください。モデルに存在しないボーンは動きません。足IKやモデル固有のボーン調整は、現バージョンでは未対応です。</p></aside></div>
+<div class="footer"><span class="tag">BROWSER APP</span><span class="tag">NO INSTALL REQUIRED</span> 生成処理はこのページ内で実行されます。試作版のため、完成した振付というより編集の土台となるベースモーションです。</div>
+</div>
+<section class="panel" style="max-width:1000px;margin:18px auto 0">
+  <h2><span class="num">03</span> 対応ボーン階層</h2>
+  <p class="note" style="margin-bottom:14px">指定されたボーン構成を確認できます。左右の腕・指・目のボーンを含めています。★・☆は元の命名メモとして表示しています。</p>
+  <details open>
+    <summary style="cursor:pointer;font-weight:750;padding:8px 0">センター／上半身／頭部</summary>
+    <div style="font:12px/1.9 ui-monospace,monospace;padding:8px 12px;border-left:2px solid var(--line);margin-left:6px;white-space:pre-wrap">センター
+└─ 上半身
+   ├─ 首
+   │  └─ 頭
+   │     ├─ 目_L★ ─ 目先_L☆
+   │     ├─ 目_R★ ─ 目先_R☆
+   │     ├─ 両目 ─ 両目先☆
+   │     ├─ _dummy_目_L / _dummy_目_R
+   │     ├─ 頭先☆
+   │     ├─ _shadow_目_L★
+   │     └─ _shadow_目_R★
+   ├─ 肩_L ─ 腕_L ─ ひじ_L ─ 手首_L ─ 指ボーン
+   └─ 肩_R ─ 腕_R ─ ひじ_R ─ 手首_R ─ 指ボーン
+下半身
+├─ 足IK_L
+└─ 足IK_R</div>
+  </details>
+  <p class="note" style="margin-top:12px">注意：ボーン名はモデルごとに異なります。現在の生成モーションは標準的なMMDボーン向けです。独自名の目・指・IKボーンを正確に動かすには、モデル側のボーン名とIK構造に合わせた調整が必要です。</p>
+</section>
+</main>
+<script>
+const NAME_BYTES = {"センター":[131,90,131,147,131,94,129,91],"上半身":[143,227,148,188,144,103],"上半身2":[143,227,148,188,144,103,50],"下半身":[137,186,148,188,144,103],"首":[142,241],"頭":[147,170],"右肩":[137,69,140,168],"左肩":[141,182,140,168],"右腕":[137,69,152,114],"左腕":[141,182,152,114],"右ひじ":[137,69,130,208,130,182],"左ひじ":[141,182,130,208,130,182],"右手首":[137,69,142,232,142,241],"左手首":[141,182,142,232,142,241],"右足":[137,69,145,171],"左足":[141,182,145,171],"右ひざ":[137,69,130,208,130,180],"左ひざ":[141,182,130,208,130,180],"右足首":[137,69,145,171,142,241],"左足首":[141,182,145,171,142,241]};
+const $ = id => document.getElementById(id);
+$('intensity').addEventListener('input', () => $('intensityValue').textContent = $('intensity').value + '%');
+function updateStats(){ $('durationStat').textContent = $('duration').value || '—'; $('bpmStat').textContent = $('bpm').value || '—'; }
+$('duration').addEventListener('input', updateStats); $('bpm').addEventListener('input', updateStats);
+function quat(rx,ry,rz){const cx=Math.cos(rx/2),sx=Math.sin(rx/2),cy=Math.cos(ry/2),sy=Math.sin(ry/2),cz=Math.cos(rz/2),sz=Math.sin(rz/2);return [cz*cy*sx-sz*sy*cx,cz*sy*cx+sz*cy*sx,sz*cy*cx-cz*sy*sx,cz*cy*cx+sz*sy*sx];}
+function poseAt(t,style,intensity){const beat=t*2*Math.PI*2,amp=intensity/100;let armBase=style==='アイドル'?.30:style==='クール'?.20:.26;let stepAmp=style==='アイドル'?.28:style==='クール'?.20:.24;let sway=Math.sin(beat)*stepAmp,twist=Math.sin(beat/2)*.12;let shoulder=style==='アイドル'?.18:style==='クール'?.10:.14;let phrase=Math.floor(t/4),lift=[.10,.28,.38,.18,.45,.25,.52,.08][phrase%8];let wristWave=style==='アイドル'?.24*Math.sin(beat*.5):style==='クール'?.10*Math.sin(beat*.5):.18*Math.sin(beat*.5);let p={};const add=(n,rx=0,ry=0,rz=0,pos=[0,0,0])=>p[n]={pos,rot:quat(rx*amp,ry*amp,rz*amp)};
+add('センター',.02*Math.sin(beat),.04*Math.sin(beat/2),.04*Math.sin(beat),[.12*Math.sin(beat/2)*amp,.02*(1+Math.sin(beat*2))*amp,.06*Math.cos(beat/2)*amp]);add('上半身',.04*Math.sin(beat),twist,sway*.20);add('上半身2',.025*Math.sin(beat+1),-twist*.6,-sway*.12);add('下半身',.015*Math.sin(beat),-twist*.5,-sway*.10);add('首',.035*Math.sin(beat/2),.04*Math.sin(beat),.05*Math.sin(beat/2));add('頭',.035*Math.sin(beat/2+.6),.07*Math.sin(beat/2),.04*Math.sin(beat+.4));let rr=armBase+lift+.28*Math.sin(beat/2),lr=armBase+lift+.28*Math.sin(beat/2+Math.PI);let armScale=style==='クール'?.8:1;add('右肩',0,0,-(style==='アイドル'?.08:style==='クール'?.04:.06)*Math.sin(beat));add('左肩',0,0,(style==='アイドル'?.08:style==='クール'?.04:.06)*Math.sin(beat));add('右腕',.10*Math.sin(beat),.08*Math.sin(beat/2),-rr*armScale);add('左腕',.10*Math.sin(beat+Math.PI),-.08*Math.sin(beat/2),lr*armScale);add('右ひじ',.15+.22*Math.sin(beat+.7),0,.04*Math.sin(beat));add('左ひじ',.15+.22*Math.sin(beat+Math.PI+.7),0,-.04*Math.sin(beat));add('右手首',wristWave,0,.12*Math.sin(beat*.5));add('左手首',-wristWave,0,-.12*Math.sin(beat*.5));add('右足',stepAmp*Math.sin(beat),.02*Math.sin(beat),.04*Math.sin(beat));add('左足',stepAmp*Math.sin(beat+Math.PI),-.02*Math.sin(beat),-.04*Math.sin(beat));add('右ひざ',.10+.18*Math.max(0,Math.sin(beat)),0,0);add('左ひざ',.10+.18*Math.max(0,Math.sin(beat+Math.PI)),0,0);add('右足首',.04*Math.sin(beat+.5),0,0);add('左足首',.04*Math.sin(beat+Math.PI+.5),0,0);return p;}
+function writeVMD(duration,bpm,style,intensity){const fps=30,total=Math.round(duration*fps),frames=new Set([0,total]);const fpb=fps*60/bpm;for(let f=0;f<total;f+=fpb)frames.add(Math.round(f));for(let f=0;f<=total;f+=15)frames.add(f);const sorted=[...frames].filter(f=>f>=0&&f<=total).sort((a,b)=>a-b);const keys=[];for(const f of sorted){const pose=poseAt(f/fps,style,intensity);for(const name of Object.keys(pose))keys.push({name,frame:f,...pose[name]});}keys.sort((a,b)=>{const aa=NAME_BYTES[a.name],bb=NAME_BYTES[b.name];for(let i=0;i<Math.min(aa.length,bb.length);i++){if(aa[i]!==bb[i])return aa[i]-bb[i];}return aa.length-bb.length||a.frame-b.frame;});const header=new Uint8Array(30);new TextEncoder().encode('Vocaloid Motion Data 0002').forEach((v,i)=>header[i]=v);const model=new Uint8Array(20);new TextEncoder().encode('MMD Original Motion Maker').slice(0,20).forEach((v,i)=>model[i]=v);const keySize=15+4+12+16+64;const size=30+20+4+keys.length*keySize+16;const buffer=new ArrayBuffer(size),view=new DataView(buffer),u8=new Uint8Array(buffer);let o=0;u8.set(header,o);o+=30;u8.set(model,o);o+=20;view.setUint32(o,keys.length,true);o+=4;const curve=new Uint8Array(64);for(let c=0;c<4;c++)curve.set([20,20,107,107],c*16);for(const k of keys){const nb=NAME_BYTES[k.name];u8.set(nb.slice(0,15),o);o+=15;view.setUint32(o,k.frame,true);o+=4;for(const v of k.pos){view.setFloat32(o,v,true);o+=4;}for(const v of k.rot){view.setFloat32(o,v,true);o+=4;}u8.set(curve,o);o+=64;}for(let i=0;i<4;i++){view.setUint32(o,0,true);o+=4;}return {buffer,keyCount:keys.length,frameCount:sorted.length};}
+$('generate').addEventListener('click',()=>{const duration=Number($('duration').value),bpm=Number($('bpm').value),intensity=Number($('intensity').value),style=document.querySelector('input[name="style"]:checked').value;const status=$('status');if(!Number.isInteger(duration)||duration<4||duration>600){status.className='status';status.textContent='曲の長さは4〜600秒の整数で入力してください。';$('duration').focus();return;}if(!Number.isInteger(bpm)||bpm<40||bpm>240){status.className='status';status.textContent='BPMは40〜240の整数で入力してください。';$('bpm').focus();return;}try{status.className='status';status.textContent='モーションを生成しています…';const result=writeVMD(duration,bpm,style,intensity);const blob=new Blob([result.buffer],{type:'application/octet-stream'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`original_dance_${duration}s_${bpm}bpm.vmd`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);status.className='status ok';status.textContent=`生成完了：${result.keyCount.toLocaleString()}個のボーンキー／${result.frameCount.toLocaleString()}フレーム。VMDファイルを保存しました。MMDで読み込んで動きを確認してください。`;}catch(e){status.className='status';status.textContent='生成中にエラーが発生しました：'+e.message;}});
+</script>
+<script>
+// 指定された独自命名ボーンの一覧。VMDのボーン名はShift-JIS(CP932)で格納する。
+const CUSTOM_BONE_BYTES = {
+"目_L":[150,218,95,76],"目先_L":[150,218,144,230,95,76],"目_R":[150,218,95,82],"目先_R":[150,218,144,230,95,82],"両目":[151,188,150,218],"両目先":[151,188,150,218,144,230],"_dummy_目_L":[95,100,117,109,109,121,95,150,218,95,76],"_dummy_目_R":[95,100,117,109,109,121,95,150,218,95,82],"頭先":[147,170,144,230],"_shadow_目_L":[95,115,104,97,100,111,119,95,150,218,95,76],"_shadow_目_R":[95,115,104,97,100,111,119,95,150,218,95,82],
+"肩_L":[140,168,95,76],"腕_L":[152,114,95,76],"ひじ_L":[130,208,130,182,95,76],"手首_L":[142,232,142,241,95,76],"肩_R":[140,168,95,82],"腕_R":[152,114,95,82],"ひじ_R":[130,208,130,182,95,82],"手首_R":[142,232,142,241,95,82],"手先_L":[142,232,144,230,95,76],"手先_R":[142,232,144,230,95,82],
+"親指1_L":[144,101,142,119,49,95,76],"親指2_L":[144,101,142,119,50,95,76],"親指先_L":[144,101,142,119,144,230,95,76],"人指1_L":[144,108,142,119,49,95,76],"人指2_L":[144,108,142,119,50,95,76],"人指3_L":[144,108,142,119,51,95,76],"人指先_L":[144,108,142,119,144,230,95,76],"中指1_L":[146,134,142,119,49,95,76],"中指2_L":[146,134,142,119,50,95,76],"中指3_L":[146,134,142,119,51,95,76],"中指先_L":[146,134,142,119,144,230,95,76],"薬指1_L":[150,242,142,119,49,95,76],"薬指2_L":[150,242,142,119,50,95,76],"薬指3_L":[150,242,142,119,51,95,76],"薬指先_L":[150,242,142,119,144,230,95,76],"小指1_L":[143,172,142,119,49,95,76],"小指2_L":[143,172,142,119,50,95,76],"小指3_L":[143,172,142,119,51,95,76],"小指先_L":[143,172,142,119,144,230,95,76],
+"親指1_R":[144,101,142,119,49,95,82],"親指2_R":[144,101,142,119,50,95,82],"親指先_R":[144,101,142,119,144,230,95,82],"人指1_R":[144,108,142,119,49,95,82],"人指2_R":[144,108,142,119,50,95,82],"人指3_R":[144,108,142,119,51,95,82],"人指先_R":[144,108,142,119,144,230,95,82],"中指1_R":[146,134,142,119,49,95,82],"中指2_R":[146,134,142,119,50,95,82],"中指3_R":[146,134,142,119,51,95,82],"中指先_R":[146,134,142,119,144,230,95,82],"薬指1_R":[150,242,142,119,49,95,82],"薬指2_R":[150,242,142,119,50,95,82],"薬指3_R":[150,242,142,119,51,95,82],"薬指先_R":[150,242,142,119,144,230,95,82],"小指1_R":[143,172,142,119,49,95,82],"小指2_R":[143,172,142,119,50,95,82],"小指3_R":[143,172,142,119,51,95,82],"小指先_R":[143,172,142,119,144,230,95,82]
+};
+// CP932(Shift-JIS) の「肩」は 8C 8A。誤ったバイト列を修正。
+CUSTOM_BONE_BYTES["肩_L"] = [140,138,95,76];
+CUSTOM_BONE_BYTES["肩_R"] = [140,138,95,82];
+Object.assign(NAME_BYTES, CUSTOM_BONE_BYTES);
+// 独自命名の肩・腕・肘・手首と目・指を、標準モーションに連動させる。
+const originalPoseAt = poseAt;
+poseAt = function(t, style, intensity) {
+  const p = originalPoseAt(t, style, intensity);
+  const amp = intensity / 100, beat = t * Math.PI * 4;
+  const mirror = (source, target, sign=1) => { if (p[source]) p[target] = {pos:[...p[source].pos], rot:[p[source].rot[0]*sign,p[source].rot[1],p[source].rot[2]*sign,p[source].rot[3]]}; };
+  mirror('左肩','肩_L'); mirror('左腕','腕_L'); mirror('左ひじ','ひじ_L'); mirror('左手首','手首_L');
+  mirror('右肩','肩_R'); mirror('右腕','腕_R'); mirror('右ひじ','ひじ_R'); mirror('右手首','手首_R');
+  p['目_L']={pos:[0,0,0],rot:quat(0,.025*Math.sin(beat/2)*amp,0)};
+  p['目_R']={pos:[0,0,0],rot:quat(0,.025*Math.sin(beat/2)*amp,0)};
+  p['両目']={pos:[0,0,0],rot:quat(0,.018*Math.sin(beat/2)*amp,0)};
+  p['頭先']={pos:[0,0,0],rot:[0,0,0,1]};
+  p['目先_L']={pos:[0,0,0],rot:[0,0,0,1]}; p['目先_R']={pos:[0,0,0],rot:[0,0,0,1]}; p['両目先']={pos:[0,0,0],rot:[0,0,0,1]};
+  p['_dummy_目_L']={pos:[0,0,0],rot:[0,0,0,1]}; p['_dummy_目_R']={pos:[0,0,0],rot:[0,0,0,1]};
+  p['_shadow_目_L']={pos:[0,0,0],rot:[0,0,0,1]}; p['_shadow_目_R']={pos:[0,0,0],rot:[0,0,0,1]};
+  for (const side of ['L','R']) {
+    const s = side==='L' ? 1 : -1;
+    p['手先_'+side]={pos:[0,0,0],rot:quat(.04*Math.sin(beat)*amp,0,s*.025*Math.sin(beat/2)*amp)};
+    for (const finger of ['親指','人指','中指','薬指','小指']) {
+      const count = finger==='親指' ? 2 : 3;
+      for(let i=1;i<=count;i++) p[finger+i+'_'+side]={pos:[0,0,0],rot:quat((finger==='親指'?.10:.16)*Math.sin(beat/2+(finger==='小指'?0.7:0))*amp,0,(finger==='親指'?s*.04:s*.015)*amp)};
+      p[finger+'先_'+side]={pos:[0,0,0],rot:[0,0,0,1]};
+    }
+  }
+  return p;
+};
+// VMD末尾の4つの件数フィールドは writeVMD 内で出力済みです。
+// 標準ボーン名「右肩」「左肩」のCP932バイト列も修正する。
+NAME_BYTES["右肩"] = [137,69,140,138];
+NAME_BYTES["左肩"] = [141,182,140,138];
+// 120 BPMを基準にした動作周期を、入力BPMに同期させる。
+const poseAtBeforeBpmSync = poseAt;
+poseAt = function(t, style, intensity) {
+  const bpm = Number($('bpm').value) || 120;
+  return poseAtBeforeBpmSync(t * bpm / 120, style, intensity);
+};
+// VMD補間データは各制御点を4バイトずつ並べる形式にする。
+const writeVMDBeforeCurveFix = writeVMD;
+writeVMD = function(...args) {
+  const result = writeVMDBeforeCurveFix(...args);
+  const buffer = result.buffer.slice(0);
+  const view = new DataView(buffer);
+  const bytes = new Uint8Array(buffer);
+  const keyCount = view.getUint32(50, true);
+  const keySize = 111;
+  const curveOffset = 30 + 20 + 4 + 15 + 4 + 12 + 16;
+  const curve = new Uint8Array(64);
+  for (let c = 0; c < 4; c++) {
+    const base = c * 16;
+    curve.set([20,20,20,20,20,20,20,20,107,107,107,107,107,107,107,107], base);
+  }
+  for (let i = 0; i < keyCount; i++) {
+    const offset = 54 + i * keySize + 15 + 4 + 12 + 16;
+    bytes.set(curve, offset);
+  }
+  return {...result, buffer};
+};
+</script></body></html>
